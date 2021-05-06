@@ -27,8 +27,9 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
 }
 
 #mw-navigation .nav-item > .nav-link:hover {
-  border-bottom: .5rem solid $luh-lime;
-  margin-bottom: -.5rem;
+  border-bottom: .25rem solid $luh-lime;
+  padding-bottom: .75rem;
+  margin-bottom: -.75rem;
 }
 
 #searchGoButton,.nav-link {
@@ -42,6 +43,40 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   color: $luh-gray;
 }
 
+
+// ================ TABLES LAYOUTS ================
+
 wikitable {
+
+}
+
+table.infoboxright {
+
+  @extend .table;
+
+}
+
+table.infobox {
+  @extend .table;
+  @extend .rounded;
+  //@extend .bg-light;
+  float: right;
+  clear: right;
+  width: 30em;
+  border-color: #c6c8ca;
+}
+table.infobox > tbody > tr:first-child {
+  color: #fff;
+  background-color: $luh-blue;
+  border-color: #454d55;
+}
+
+table.infobox > tbody > tr {
+  background-color: white;
+}
+
+
+/* Contents */
+div.toc {
 
 }
