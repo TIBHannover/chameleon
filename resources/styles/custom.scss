@@ -44,16 +44,9 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
 }
 
 
-// ================ TABLES LAYOUTS ================
-
-wikitable {
-
-}
 
 table.infoboxright {
-
   @extend .table;
-
 }
 
 table.infobox {
@@ -75,8 +68,25 @@ table.infobox > tbody > tr {
   background-color: white;
 }
 
+// ================ FORM LAYOUTS ================
 
-/* Contents */
-div.toc {
+table.formtable {
 
 }
+
+table.formtable tr {
+  @extend .form-group;
+}
+
+table.formtable input {
+  /*
+  all: initial;
+  * {
+    all: unset;
+  }
+  */
+  @extend .form-control;
+
+}
+
+
