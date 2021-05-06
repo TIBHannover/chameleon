@@ -25,7 +25,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 -->
 <structure xmlns="https://ProfessionalWiki.github.io/chameleon/schema/3.0/layout.rng">
 	<grid class="flex-fill">
-		<row>
+		<row class="mt-3">
 			<cell class="flex-grow-0">
 				<component type="Logo" addLink="yes"/>
 			</cell>

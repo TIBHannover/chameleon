@@ -26,37 +26,36 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 <structure xmlns="https://ProfessionalWiki.github.io/chameleon/schema/3.0/layout.rng">
 	<grid class="flex-fill">
 		<row class="mt-3">
+			<cell class="ml-auto col-12 col-cmln">
+				<component type="PersonalTools" hideNewtalkNotifier="yes" class="pull-right"/>
+			</cell>
+		</row>
+		<row class="mt-3 bg-luh-blue">
 			<cell class="flex-grow-0">
 				<component type="Logo" addLink="yes"/>
 			</cell>
-
-			<cell class="ml-auto col-12 col-cmln">
-
-				<row>
-					<cell>
-						<component type="PersonalTools" hideNewtalkNotifier="yes" class="pull-right"/>
+			<cell class="col-md col-12 pt-3 d-flex flex-column">
+				<row class="">
+					<cell class="col-md col-12">
+						<component type="Html"><![CDATA[
+							<span class="heading"></span>
+						]]></component>
 					</cell>
-				</row>
-
-				<row>
-					<cell>
+					<cell class="col-md col-12">
 						<component type="SearchBar" buttons="go" class="pull-right"/>
 					</cell>
 				</row>
-
+				<row class="mt-auto">
+					<cell>
+						<component type="NavbarHorizontal" class="mt-2 mt-cmln-0 bg-luh-gray rounded-top">
+							<component type="NavMenu"/>
+							<component type="Menu" message="secondary-menu"/>
+						</component>
+					</cell>
+				</row>
 			</cell>
 		</row>
-
-		<row>
-			<cell>
-				<component type="NavbarHorizontal" class="mb-3 mt-2 mt-cmln-0">
-					<component type="NavMenu"/>
-					<component type="Menu" message="secondary-menu"/>
-				</component>
-			</cell>
-		</row>
-
-		<row>
+		<row class="mt-3">
 			<cell>
 				<component type="PageTools" class="mb-3"/>
 			</cell>
@@ -83,15 +82,23 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 	</grid>
 
 	<grid class="mb-2 mt-4">
-		<row>
-			<cell>
-				<component type="NavbarHorizontal" collapsible="no" class="small mb-2" >
+		<row class="bg-luh-gray py-2">
+			<cell class="col-12 col-md-2">
+				<component type="NavbarHorizontal" collapsible="no" class="small my-3 bg-luh-gray" >
 					<component type="Toolbox" flatten="no" class="dropup"/>
-					<component type="LangLinks" flatten="no" class="dropup"/>
 				</component>
 			</cell>
-		</row>
+			<cell class="col-12 col-md-8">
+				<row>
+					<cell class="col-12 col-md-4 image-luh"></cell>
+					<cell class="col-12 col-md-4 image-luh"></cell>
+					<cell class="col-12 col-md-4 image-luh"></cell>
+				</row>
+			</cell>
+			<cell class="col-12 col-md-2">
 
+			</cell>
+		</row>
 		<row>
 			<cell>
 				<component type="FooterInfo"/>

@@ -1,0 +1,47 @@
+// luh colors
+$luh-blue: #003B72;
+$luh-gray: #E6E6E6;
+$luh-lime: #B4C624;
+
+// sbf colors
+$sbf-color-1: #640904;
+$sbf-color-2: #259E7D;
+$sbf-color-3: #c8242c;
+$sbf-color-4: #004F9F; // do not use, to close to luh-blue
+
+.bg-luh-blue {
+  color: $luh-gray;
+  background-color: $luh-blue;
+}
+
+.bg-luh-gray {
+  background-color: $luh-gray;
+}
+
+.image-luh {
+  min-height: 75px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/de/thumb/c/c4/Leibniz-Universität_Hannover.svg/1204px-Leibniz-Universität_Hannover.svg.png') !important;
+  background-size:     contain;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+#mw-navigation .nav-item > .nav-link:hover {
+  border-bottom: .5rem solid $luh-lime;
+  margin-bottom: -.5rem;
+}
+
+#searchGoButton,.nav-link {
+  color: $luh-blue !important;
+}
+
+.heading:before {
+  content: "SFB 1368";
+  font-weight: bold;
+  font-size: xx-large;
+  color: $luh-gray;
+}
+
+wikitable {
+
+}
