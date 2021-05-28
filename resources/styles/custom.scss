@@ -1,5 +1,6 @@
 // luh colors
-$luh-blue: #003B72;
+$luh-blue: #00509b;
+//$luh-blue: #00519e;
 $luh-gray: #E6E6E6;
 $luh-lime: #B4C624;
 
@@ -11,11 +12,14 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
 
 .bg-luh-blue {
   color: $luh-gray;
-  background-color: $luh-blue;
+  background-color: $luh-blue !important;
 }
 
 .bg-luh-gray {
-  background-color: $luh-gray;
+  background-color: $luh-gray !important;
+}
+.bg-luh-lime {
+  background-color: $luh-lime !important;
 }
 
 .image-luh {
@@ -43,8 +47,6 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   color: $luh-gray;
 }
 
-
-
 table.infoboxright {
   @extend .table;
 }
@@ -68,6 +70,46 @@ table.infobox > tbody > tr {
   background-color: white;
 }
 
+// ================ BUTTON LAYOUTS ================
+
+// main page
+form button {
+  @extend .btn;
+  color: $luh-gray !important;
+  @extend .bg-luh-blue;
+  border-radius: 0 4px 4px 0 !important;
+}
+
+// edit buttons
+.editButtons input[type="submit"] {
+  @extend .btn;
+  color: $luh-gray !important;
+  @extend .bg-luh-blue;
+}
+
+// ================ FACTBOX LAYOUTS ================
+
+// button
+.smw-factbox input[type="radio"].tab-facts-list {
+
+}
+
+// lime border top
+.smw-factbox input.nav-tab:checked + label.nav-label {
+  border-top: 2px solid $luh-lime !important;
+}
+
+// factbox
+.smwfact {
+  @extend .collapse;
+  border-bottom: 1px solid #aaa !important;
+}
+
+// factbox container
+#tab-content-facts-list {
+  border-bottom: 0px;
+}
+
 // ================ FORM LAYOUTS ================
 
 table.formtable {
@@ -75,7 +117,7 @@ table.formtable {
 }
 
 table.formtable tr {
-  @extend .form-group;
+
 }
 
 table.formtable input {

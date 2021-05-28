@@ -119,4 +119,15 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 			</cell>
 		</row>
 	</grid>
+	<component type="Html"><![CDATA[
+  		<script>
+  			$( document ).ready(function() {
+				if($('#tab-facts-list').length ) {
+					$('#tab-facts-list').attr("data-toggle", "collapse");
+					$('#tab-facts-list').attr("data-target", ".smwfact");
+					$('.smwfact').removeAttr("style");
+				}
+			});
+  		</script>
+	]]></component>
 </structure>
