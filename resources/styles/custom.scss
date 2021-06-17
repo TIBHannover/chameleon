@@ -1,14 +1,15 @@
+// ================ COLORS ================
+
 // luh colors
-$luh-blue: #00509b;
-//$luh-blue: #00519e;
+$luh-blue: #00509b; //$luh-blue: #00519e;
 $luh-gray: #E6E6E6;
 $luh-lime: #B4C624;
 
 // sbf colors
-$sbf-color-1: #640904;
-$sbf-color-2: #259E7D;
-$sbf-color-3: #c8242c;
-$sbf-color-4: #004F9F; // do not use, to close to luh-blue
+$sbf-color-1: #098bc2;
+$sbf-color-2: #c7c7c7;
+$sbf-color-3: #000000; // do not use, it is black
+$sbf-color-4: #edefee; // do not use, to close to luh-gray
 
 .bg-luh-blue {
   color: $luh-gray;
@@ -22,6 +23,40 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   background-color: $luh-lime !important;
 }
 
+.color-luh-gray {
+  color: $luh-gray !important;
+}
+
+// ================ NAVBAR ================
+
+#p-logo img {
+  width: 100%;
+}
+
+#searchGoButton {
+  color: $luh-blue !important;
+}
+
+.nav-link {
+  color: $luh-gray !important;
+}
+.nav-link:hover {
+  color: $luh-lime !important;
+}
+
+.bg-luh-blue .dropdown-menu {
+  @extend .bg-luh-blue;
+}
+
+.heading:before {
+  content: "Sonderforschungsbereich 1153";
+  font-weight: bold;
+  font-size: xx-large;
+  color: $sbf-color-1;
+}
+
+// ================ FOOTER ================
+
 .image-luh {
   min-height: 75px;
   background-image: url('https://upload.wikimedia.org/wikipedia/de/thumb/c/c4/Leibniz-Universität_Hannover.svg/1204px-Leibniz-Universität_Hannover.svg.png') !important;
@@ -30,22 +65,7 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   background-position: center center;
 }
 
-#mw-navigation .nav-item > .nav-link:hover {
-  border-bottom: .25rem solid $luh-lime;
-  padding-bottom: .75rem;
-  margin-bottom: -.75rem;
-}
-
-#searchGoButton,.nav-link {
-  color: $luh-blue !important;
-}
-
-.heading:before {
-  content: "SFB 1368";
-  font-weight: bold;
-  font-size: xx-large;
-  color: $luh-gray;
-}
+// ================ INFOBOX ================
 
 table.infoboxright {
   @extend .table;
@@ -54,7 +74,6 @@ table.infoboxright {
 table.infobox {
   @extend .table;
   @extend .rounded;
-  //@extend .bg-light;
   float: right;
   clear: right;
   width: 30em;
@@ -72,6 +91,39 @@ table.infobox > tbody > tr {
 
 // ================ BUTTON LAYOUTS ================
 
+// all buttons
+input[type="submit"][value="Go"], .editOptions .oo-ui-buttonElement-button, button#wpLoginAttempt {
+  @extend .btn;
+  @extend .color-luh-gray;
+  border-radius: 4px !important;
+  border: none !important;
+}
+
+// link appearance
+a.oo-ui-buttonElement-button span{
+  line-height: 1.5 !important;
+  padding-left: 0.375rem;
+  padding-right: 0.375rem;
+}
+
+// cancel button
+.cancelLink a[role="button"] {
+  margin-left: .375rem;
+  @extend .btn-warning;
+}
+
+// cancel save changes
+#wpSave {
+  @extend .btn-primary;
+}
+
+
+// cancel show preview/show changes
+#wpPreview, #wpDiff {
+  @extend .btn-info;
+}
+
+/*
 // main page
 form button {
   @extend .btn;
@@ -86,6 +138,8 @@ form button {
   color: $luh-gray !important;
   @extend .bg-luh-blue;
 }
+*/
+
 
 // ================ FACTBOX LAYOUTS ================
 
