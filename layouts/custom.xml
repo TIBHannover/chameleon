@@ -24,7 +24,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 @ingroup Skins
 -->
 <structure xmlns="https://ProfessionalWiki.github.io/chameleon/schema/3.0/layout.rng">
-	<grid class="flex-fill" mode="fluid">
+	<grid class="flex-fill">
 		<row class="mt-1">
 			<cell class="col-12 col-md-3 col-xl-2">
 
@@ -39,30 +39,43 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 
 			</cell>
 		</row>
-		<row class="mt-1">
-			<cell class="col-12 col-md-3 col-xl-2">
-				<component type="Logo" addLink="yes"/>
-			</cell>
-			<cell class="col-12 col-md-6 col-xl-8 text-center">
-				<component type="Html">
-					<![CDATA[<span class="heading"></span>]]>
-				</component>
-			</cell>
-		</row>
+	</grid>
+	<!-- Main -->
+	<grid class="flex-fill" mode="fluid">
 		<row class="flex-xl-nowrap mt-3">
+			<!-- Left Column -->
 			<cell class="col-12 col-md-3 col-xl-2 position-sticky bg-luh-blue py-3 rounded-right">
 				<component type="NavMenu"/>
 			</cell>
+			<!-- Center Column -->
 			<cell class="col-12 col-md-9 col-xl-8 ">
-				<component type="PageTools"/>
-				<component type="MainContent"/>
+				<row class="mt-1">
+					<cell class="col-6">
+						<component type="Logo" addLink="yes"/>
+
+					</cell>
+					<cell class="col-6 text-center">
+						<component type="Html">
+							<![CDATA[<span class="heading"></span>]]>
+						</component>
+					</cell>
+				</row>
+				<row class="mt-1">
+					<cell class="col-12">
+						<component type="PageTools"/>
+						<component type="MainContent"/>
+					</cell>
+				</row>
 			</cell>
+			<!-- Right Column -->
 			<cell class="d-none d-xl-block col-xl-2 ">
 				<component type="SearchBar" buttons="go"/>
 			</cell>
 		</row>
-	</grid>
 
+
+	</grid>
+	<!-- Footer -->
 	<grid class="mb-2 mt-4" mode="fluid">
 		<row class="bg-luh-gray py-2">
 			<cell class="col-12 col-md-2">
