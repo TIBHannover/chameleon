@@ -34,7 +34,13 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
 // ================ SFB 1153 ================
 
 body {
-  background-color: #aaaaaa;
+  background-color: $luh-gray;
+}
+
+#content {
+  background-color: white;
+  @extend .rounded;
+  @extend .pb-2;
 }
 
 #searchform input.form-control {
@@ -50,6 +56,12 @@ body {
 
 #p-logo img {
   width: 75px !important;
+}
+
+#p-personal a {
+  color: $luh-gray !important;
+  @extend .nav-link;
+  @extend .px-2;
 }
 
 a {

@@ -36,9 +36,12 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 				</component>
 				<cell class="col-2">
 					<component type="Logo" addLink="yes"/>
+					<component type="Html"><![CDATA[
+							<span >REV: 4</span>
+						]]></component>
 				</cell>
 				<cell class="col-8">
-					<component type="PersonalTools" class="ml-4" hideNewtalkNotifier="yes"/>
+					<component type="PersonalTools" hideNewtalkNotifier="yes"/>
 				</cell>
 				<cell class="col-2">
 					<component type="SearchBar" buttons="go"/>
@@ -51,20 +54,13 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 				</component>
 			</cell>
 		</row>
-		<row class="flex-xl-nowrap mt-0">
+		<row class="flex-xl-nowrap">
 			<!-- Left Column -->
 			<cell class="col-12 col-md-3 col-xl-2 position-sticky bg-sbf-color-1 py-3 rounded-right">
 				<component type="NavMenu"/>
 			</cell>
 			<!-- Center Column -->
 			<cell class="col-12 col-md-9 col-xl-8 ">
-				<row class="mt-1 px-4">
-					<cell class="col mx-2">
-						<component type="Html"><![CDATA[
-							<span >REV: 4</span>
-						]]></component>
-					</cell>
-				</row>
 				<row class="mt-3 px-4">
 					<cell class="col-6 col-md-3 ml-2">
 
