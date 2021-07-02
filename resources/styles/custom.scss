@@ -34,12 +34,18 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
 // ================ SFB 1153 ================
 
 #searchform input.form-control {
-  @extend .form-control-lg;
-  border-radius: 0;
+  //@extend .form-control-lg;
+  //border-radius: 0;
+}
+#p-logo {
+  @extend .p-1;
+  @extend .rounded;
+  display: inline-block;
+  background-color: white;
 }
 
 #p-logo img {
-  width: 140px !important;
+  width: 75px !important;
 }
 
 a {
@@ -48,12 +54,9 @@ a {
 
 // ================ NAVBAR ================
 
-#p-logo img {
-  width: 100%;
-}
 
 #searchGoButton {
-  color: $luh-blue !important;
+  color: $sbf-color-1 !important;
 }
 
 .nav-link {
