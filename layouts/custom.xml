@@ -37,7 +37,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 				<row class="mt-1 px-4">
 					<cell class="col mx-2">
 						<component type="Html"><![CDATA[
-							<span >REV: 2</span>
+							<span >REV: 3</span>
 						]]></component>
 						<component type="PersonalTools" hideNewtalkNotifier="yes" class="pull-right"/>
 					</cell>
