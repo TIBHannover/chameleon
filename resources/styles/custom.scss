@@ -15,6 +15,10 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
   color: $luh-gray;
   background-color: $luh-blue !important;
 }
+.bg-sbf-color-1 {
+  color: $luh-gray;
+  background-color: $sbf-color-1 !important;
+}
 
 .bg-luh-gray {
   background-color: $luh-gray !important;
@@ -25,6 +29,21 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
 
 .color-luh-gray {
   color: $luh-gray !important;
+}
+
+// ================ SFB 1153 ================
+
+#searchform input.form-control {
+  @extend .form-control-lg;
+  border-radius: 0;
+}
+
+#p-logo img {
+  width: 140px !important;
+}
+
+a {
+  color: $sbf-color-1 !important;
 }
 
 // ================ NAVBAR ================
@@ -92,11 +111,16 @@ table.infobox > tbody > tr {
 // ================ BUTTON LAYOUTS ================
 
 // all buttons
-input[type="submit"][value="Go"], .editOptions .oo-ui-buttonElement-button, button#wpLoginAttempt {
+input[type="submit"][value="Go"], .editOptions .oo-ui-buttonElement-button, button#wpLoginAttempt, button.oo-ui-buttonElement-button, button[name="wpPreview"], button[name="wpDiff"], .cancelLink a[role="button"], .oo-ui-flaggedElement-destructive a[role="button"]
+{
   @extend .btn;
   @extend .color-luh-gray;
+  @extend .sfb-btn;
   border-radius: 4px !important;
   border: none !important;
+}
+.sfb-btn .oo-ui-labelElement-label {
+  font-weight: normal !important;
 }
 
 // link appearance
@@ -106,20 +130,23 @@ a.oo-ui-buttonElement-button span{
   padding-right: 0.375rem;
 }
 
-// cancel button
-.cancelLink a[role="button"] {
-  margin-left: .375rem;
+// cancel buttons
+.cancelLink a[role="button"], .oo-ui-flaggedElement-destructive a[role="button"] {
   @extend .btn-warning;
 }
 
-// cancel save changes
-#wpSave {
+.cancelLink a[role="button"] {
+  margin-left: .375rem;
+}
+
+// save/submit changes
+input#wpSave, button[name="wpSave"] {
   @extend .btn-primary;
 }
 
 
-// cancel show preview/show changes
-#wpPreview, #wpDiff {
+// preview/show changes
+input#wpPreview, input#wpDiff,button[name="wpPreview"], button[name="wpDiff"] {
   @extend .btn-info;
 }
 
