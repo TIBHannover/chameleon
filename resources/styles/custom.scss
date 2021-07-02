@@ -33,6 +33,10 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
 
 // ================ SFB 1153 ================
 
+body {
+  background-color: #aaaaaa;
+}
+
 #searchform input.form-control {
   //@extend .form-control-lg;
   //border-radius: 0;
