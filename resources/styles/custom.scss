@@ -27,6 +27,14 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
   background-color: $luh-lime !important;
 }
 
+.bg-white {
+  background-color: white !important;
+}
+
+.bg-1 {
+  background-color: /*#f3f9fc*/ #fafafa !important;
+}
+
 .color-luh-gray {
   color: $luh-gray !important;
 }
@@ -34,7 +42,7 @@ $sbf-color-4: #edefee; // do not use, to close to luh-gray
 // ================ SFB 1153 ================
 
 body {
-  background-color: $luh-gray;
+  background-color: white;
 }
 
 #content {
@@ -59,7 +67,7 @@ body {
 }
 
 #p-personal a {
-  color: $luh-gray !important;
+  color: $sbf-color-1 !important;
   @extend .nav-link;
   @extend .px-2;
 }
@@ -68,6 +76,14 @@ a {
   color: $sbf-color-1 !important;
 }
 
+nav {
+  @extend .py-0;
+}
+
+.nav-shadow {
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+  z-index: 10;
+}
 // ================ NAVBAR ================
 
 
@@ -75,15 +91,15 @@ a {
   color: $sbf-color-1 !important;
 }
 
-.nav-link {
-  color: $luh-gray !important;
+.nav-item .nav-link {
+  color: $sbf-color-1 !important; //sfb-1153
 }
 .nav-link:hover {
   color: $luh-lime !important;
 }
 
-.bg-luh-blue .dropdown-menu {
-  @extend .bg-luh-blue;
+.bg-sbf-color-1 .dropdown-menu {
+  @extend .bg-sbf-color-1;
 }
 
 .heading:before {
@@ -151,7 +167,7 @@ a.oo-ui-buttonElement-button span{
 
 // cancel buttons
 .cancelLink a[role="button"], .oo-ui-flaggedElement-destructive a[role="button"] {
-  @extend .btn-warning;
+  @extend .btn-danger;
 }
 
 .cancelLink a[role="button"] {
@@ -159,7 +175,7 @@ a.oo-ui-buttonElement-button span{
 }
 
 // save/submit changes
-input#wpSave, button[name="wpSave"] {
+input#wpSave, button[name="wpSave"], input[type="submit"][value="Go"] {
   @extend .btn-primary;
 }
 
@@ -211,6 +227,10 @@ form button {
 }
 
 // ================ FORM LAYOUTS ================
+
+select, input {
+  @extend .form-control;
+}
 
 table.formtable {
 

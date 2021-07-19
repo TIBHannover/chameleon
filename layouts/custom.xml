@@ -31,7 +31,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 			<cell class="col-12 px-0">
 				<component type="Html">
 					<![CDATA[
-							<nav class="navbar navbar-dark bg-dark">
+							<nav class="navbar nav-shadow bg-white">
 					]]>
 				</component>
 				<cell class="col-2">
@@ -56,7 +56,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 		</row>
 		<row class="flex-xl-nowrap">
 			<!-- Left Column -->
-			<cell class="col-12 col-md-3 col-xl-2 position-sticky bg-sbf-color-1 py-3 rounded-right">
+			<cell class="col-12 col-md-3 col-xl-2 position-sticky bg-1 py-3">
 				<component type="NavMenu"/>
 			</cell>
 			<!-- Center Column -->
