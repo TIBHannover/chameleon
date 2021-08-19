@@ -121,22 +121,27 @@ nav {
 
 // ================ INFOBOX ================
 
-table.infoboxright {
-  @extend .table;
-}
+// width: 30em; font-size: 90%; border: 1px solid #aaaaaa; background-color: #f9f9f9; color: black; margin-bottom: 0.5em; margin-left: 1em; padding: 0.2em; float: right; clear: right; text-align:left;
 
-table.infobox {
+table.infobox, table.infoboxright, table.infoboxcenter, table {
   @extend .table;
   @extend .rounded;
   float: right;
   clear: right;
   width: 30em;
   border-color: #c6c8ca;
+  overflow: scroll;
 }
 table.infobox > tbody > tr:first-child {
   color: #fff;
-  background-color: $luh-blue;
+  background-color: $sbf-color-1;
   border-color: #454d55;
+}
+
+table.infobox > tbody > tr:first-child th span {
+  color: white;
+  margin-top: .25rem;
+  margin-bottom: .25rem;
 }
 
 table.infobox > tbody > tr {
@@ -146,12 +151,27 @@ table.infobox > tbody > tr {
 // ================ BUTTON LAYOUTS ================
 
 // all buttons
-input[type="submit"][value="Go"], .editOptions .oo-ui-buttonElement-button, button#wpLoginAttempt, button.oo-ui-buttonElement-button, button[name="wpPreview"], button[name="wpDiff"], .cancelLink a[role="button"], .oo-ui-flaggedElement-destructive a[role="button"]
+input[type="submit"][value="Go"],
+.editOptions .oo-ui-buttonElement-button,
+button#wpLoginAttempt,
+button[value="Reset password"],
+button.oo-ui-buttonElement-button,
+button[name="wpPreview"],
+button[name="wpRunQuery"],
+button[name="wpDiff"],
+.cancelLink a[role="button"],
+.oo-ui-flaggedElement-destructive a[role="button"],
+.oo-ui-buttonInputWidget button,
+form[action*="Special:FormEdit/CreateSamples"] button,
+form[action*="Special:FormEdit/ControlSheet"] button,
+form.pfFormInput button
+form[name="accountrequest"] input[type="submit"],
+span.linktoform a
 {
   @extend .btn;
   @extend .color-luh-gray;
   @extend .sfb-btn;
-  border-radius: 4px !important;
+  border-radius: .25rem !important;
   border: none !important;
 }
 .sfb-btn .oo-ui-labelElement-label {
@@ -169,39 +189,63 @@ a.oo-ui-buttonElement-button span{
 .cancelLink a[role="button"], .oo-ui-flaggedElement-destructive a[role="button"] {
   @extend .btn-danger;
 }
-
 .cancelLink a[role="button"] {
   margin-left: .375rem;
 }
 
-// save/submit changes
-input#wpSave, button[name="wpSave"], input[type="submit"][value="Go"] {
+// save/submit changes + search
+input#wpSave, button[name="wpSave"],
+input[type="submit"][value="Go"],
+button#wpLoginAttempt,
+button[name="wpRunQuery"],
+input#search-action,
+button[value="Search"],
+button[value="Reset password"],
+form[name="accountrequest"] input[type="submit"] {
   @extend .btn-primary;
 }
+
+// Tools: Edit/Create Tool button
+form.pfFormInput button {
+  @extend .btn-success;
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+// Create Samples button
+form[action*="Special:FormEdit/CreateSamples"] button {
+  @extend .btn-success;
+}
+// Create Samples button icon
+form[action*="Special:FormEdit/CreateSamples"] button .oo-ui-iconElement-icon {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><title>next</title><g fill='#E6E6E6'><path d='M7 1L5.6 2.5 13 10l-7.4 7.5L7 19l9-9z'/></g></svg>") !important;
+}
+
+// ControlSheet: Add Transfer Step button
+form[action*="Special:FormEdit/ControlSheet"] button {
+  @extend .btn-success;
+}
+// Add Transfer Step button icon
+form[action*="Special:FormEdit/ControlSheet"] button .oo-ui-iconElement-icon {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'><title>next</title><g fill='#E6E6E6'><path d='M7 1L5.6 2.5 13 10l-7.4 7.5L7 19l9-9z'/></g></svg>") !important;
+}
+
+// Sample: Add Transfer Step button
+span.linktoform {
+  border: none !important;
+  padding: 0 !important;
+}
+span.linktoform a {
+  @extend .btn-success;
+  text-decoration: none !important;
+}
+
 
 
 // preview/show changes
 input#wpPreview, input#wpDiff,button[name="wpPreview"], button[name="wpDiff"] {
   @extend .btn-info;
 }
-
-/*
-// main page
-form button {
-  @extend .btn;
-  color: $luh-gray !important;
-  @extend .bg-luh-blue;
-  border-radius: 0 4px 4px 0 !important;
-}
-
-// edit buttons
-.editButtons input[type="submit"] {
-  @extend .btn;
-  color: $luh-gray !important;
-  @extend .bg-luh-blue;
-}
-*/
-
 
 // ================ FACTBOX LAYOUTS ================
 
@@ -228,27 +272,53 @@ form button {
 
 // ================ FORM LAYOUTS ================
 
-select, input {
+table.formtable select, table.formtable input, table.formtable textarea {
   @extend .form-control;
+  @extend .w-100;
+}
+
+span.radioButtonSpan:after {
+
+}
+
+label.radioButtonItem {
+  @extend .form-check;
+}
+
+table.formtable input[type="radio"],
+table.formtable input[type="checkbox"] {
+  @extend .form-check-input;
+  display: inline-block !important;
+  height: 2em;
 }
 
 table.formtable {
-
+  @extend .w-100;
 }
 
-table.formtable tr {
-
+table.formtable td {
+  @extend .pt-1;
+  @extend .pb-0;
+  @extend .pr-0;
 }
 
-table.formtable input {
-  /*
-  all: initial;
-  * {
-    all: unset;
-  }
-  */
-  @extend .form-control;
-
+table.formtable input, textarea {
+  margin-top: 0px;
 }
+
+table.formtable textarea {
+  margin-top: 0px;
+}
+
+.inputSpan .select2-container,.select2-selection {
+  width: 100% !important;
+  //margin-bottom: 0px !important;
+}
+
+.radioButtonSpan {
+  @extend .float-right;
+}
+
+
 
 
