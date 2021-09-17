@@ -36,8 +36,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 				</component>
 				<cell class="col-2">
 					<component type="Logo" addLink="yes"/>
-					<component type="Html"><![CDATA[
-							<span >REV: 5</span>
+					<component type="Html"><![CDATA [
 						]]></component>
 				</cell>
 				<cell class="col-8">
