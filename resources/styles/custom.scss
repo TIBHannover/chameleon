@@ -1,10 +1,12 @@
+// ================ COLORS ================
+
 // luh colors
 $luh-blue: #00509b;
 //$luh-blue: #00519e;
 $luh-gray: #E6E6E6;
 $luh-lime: #B4C624;
 
-// sbf colors
+// sbf1368 colors
 $sbf-color-1: #640904;
 $sbf-color-2: #259E7D;
 $sbf-color-3: #c8242c;
@@ -21,6 +23,25 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
 .bg-luh-lime {
   background-color: $luh-lime !important;
 }
+
+.bg-sbf-color-1 {
+  color: $luh-gray;
+  background-color: $sbf-color-1 !important;
+}
+
+.bg-white {
+  background-color: white !important;
+}
+
+.bg-1 {
+  background-color: /*#f3f9fc*/ #fafafa !important;
+}
+
+.color-luh-gray {
+  color: $luh-gray !important;
+}
+
+// ================ IMAGES ================
 
 .image-luh {
   height: 60px;
@@ -46,6 +67,8 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   background-position: center center;
 }
 
+// ================ SFB1368 ================
+
 #mw-navigation .nav-item > .nav-link:hover {
   border-bottom: .25rem solid $luh-lime;
   padding-bottom: .75rem;
@@ -63,176 +86,7 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   color: $luh-gray;
 }
 
-table.infoboxright {
-  @extend .table;
-}
-
-table.infobox {
-  @extend .table;
-  @extend .rounded;
-  //@extend .bg-light;
-  float: right;
-  clear: right;
-  width: 30em;
-  border-color: #c6c8ca;
-}
-table.infobox > tbody > tr:first-child {
-  color: #fff;
-  background-color: $luh-blue;
-  border-color: #454d55;
-}
-
-table.infobox > tbody > tr {
-  background-color: white;
-}
-
-// ================ BUTTON LAYOUTS ================
-
-// main page
-form button {
-  @extend .btn;
-  color: $luh-gray !important;
-  @extend .bg-luh-blue;
-  border-radius: 0 4px 4px 0 !important;
-}
-
-// edit buttons
-.editButtons input[type="submit"] {
-  @extend .btn;
-  color: $luh-gray !important;
-  @extend .bg-luh-blue;
-}
-
-// ================ FACTBOX LAYOUTS ================
-
-// button
-.smw-factbox input[type="radio"].tab-facts-list {
-
-}
-
-// lime border top
-.smw-factbox input.nav-tab:checked + label.nav-label {
-  border-top: 2px solid $luh-lime !important;
-}
-
-// factbox
-.smwfact {
-  @extend .collapse;
-  border-bottom: 1px solid #aaa !important;
-}
-
-// factbox container
-#tab-content-facts-list {
-  border-bottom: 0px;
-}
-
-// ================ FORM LAYOUTS ================
-
-table.formtable {
-
-}
-
-table.formtable tr {
-
-}
-
-table.formtable input {
-  /*
-  all: initial;
-  * {
-    all: unset;
-  }
-  */
-  @extend .form-control;
-
-}
-
-
-///
-
-// ================ SFB 1153 ================
-
-body {
-  background-color: white;
-}
-
-#content {
-  background-color: white;
-  @extend .rounded;
-  @extend .pb-2;
-}
-
-#searchform input.form-control {
-  //@extend .form-control-lg;
-  //border-radius: 0;
-}
-#p-logo {
-  @extend .p-1;
-  @extend .rounded;
-  display: inline-block;
-  background-color: white;
-}
-
-#p-logo img {
-  width: 75px !important;
-}
-
-#p-personal a {
-  color: $sbf-color-1 !important;
-  @extend .nav-link;
-  @extend .px-2;
-}
-
-a {
-  color: $sbf-color-1 !important;
-}
-
-nav {
-  @extend .py-0;
-}
-
-.nav-shadow {
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
-  z-index: 10;
-}
-// ================ NAVBAR ================
-
-
-#searchGoButton {
-  color: $sbf-color-1 !important;
-}
-
-.nav-item .nav-link {
-  color: $sbf-color-1 !important; //sfb-1153
-}
-.nav-link:hover {
-  color: $luh-lime !important;
-}
-
-.bg-sbf-color-1 .dropdown-menu {
-  @extend .bg-sbf-color-1;
-}
-
-.heading:before {
-  content: "SFB 1153";
-  font-weight: bold;
-  font-size: xx-large;
-  color: $sbf-color-1;
-}
-
-// ================ FOOTER ================
-
-.image-luh {
-  min-height: 75px;
-  background-image: url('https://upload.wikimedia.org/wikipedia/de/thumb/c/c4/Leibniz-Universität_Hannover.svg/1204px-Leibniz-Universität_Hannover.svg.png') !important;
-  background-size:     contain;
-  background-repeat:   no-repeat;
-  background-position: center center;
-}
-
 // ================ INFOBOX ================
-
-// width: 30em; font-size: 90%; border: 1px solid #aaaaaa; background-color: #f9f9f9; color: black; margin-bottom: 0.5em; margin-left: 1em; padding: 0.2em; float: right; clear: right; text-align:left;
 
 table.infobox, table.infoboxright, table.infoboxcenter, table {
   @extend .table;
@@ -243,9 +97,10 @@ table.infobox, table.infoboxright, table.infoboxcenter, table {
   border-color: #c6c8ca;
   overflow: scroll;
 }
+
 table.infobox > tbody > tr:first-child {
   color: #fff;
-  background-color: $sbf-color-1;
+  background-color: $luh-blue;
   border-color: #454d55;
 }
 
@@ -351,8 +206,6 @@ span.linktoform a {
   text-decoration: none !important;
 }
 
-
-
 // preview/show changes
 input#wpPreview, input#wpDiff,button[name="wpPreview"], button[name="wpDiff"] {
   @extend .btn-info;
@@ -381,6 +234,14 @@ input#wpPreview, input#wpDiff,button[name="wpPreview"], button[name="wpDiff"] {
   border-bottom: 0px;
 }
 
+// ================ TABLE LAYOUTS ================
+
+.smwtable {
+  overflow-x: auto !important;
+  display: block;
+}
+
+//
 // ================ FORM LAYOUTS ================
 
 table.formtable select, table.formtable input, table.formtable textarea {
@@ -396,13 +257,21 @@ label.radioButtonItem {
   @extend .form-check;
 }
 
-table.formtable input[type="radio"],
+/*
+table.formtable input[type="radio"] {
+  @extend .form-check-input;
+  display: inline-block !important;
+  height: 2em;
+}
+
 table.formtable input[type="checkbox"] {
   @extend .form-check-input;
   display: inline-block !important;
   height: 2em;
 }
 
+
+ */
 table.formtable {
   @extend .w-100;
 }
@@ -429,7 +298,3 @@ table.formtable textarea {
 .radioButtonSpan {
   @extend .float-right;
 }
-
-
-
-
