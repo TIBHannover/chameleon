@@ -44,25 +44,29 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
 // ================ IMAGES ================
 
 .image-luh {
-  height: 60px;
+  width: 100%;
+  height: 50px;
   background-image: url('https://www.sfb1368.uni-hannover.de/fileadmin/sfb1368/Logos/luh-bw.svg') !important;
-  background-size:     contain;
+  background-size:     60% auto;
   background-repeat:   no-repeat;
   background-position: center center;
+  margin-top: -0px;
 }
 
 .image-tuc {
-  height: 75px;
+  width: 100%;
+  height: 50px;
   background-image: url('https://www.sfb1368.uni-hannover.de/fileadmin/sfb1368/Logos/Logo_TUC_de_CMYK_bw.svg') !important;
-  background-size:     contain;
+  background-size:     60% auto;
   background-repeat:   no-repeat;
   background-position: center center;
 }
 
 .image-lzh {
+  width: 100%;
   height: 50px;
   background-image: url('https://www.sfb1368.uni-hannover.de/fileadmin/sfb1368/Logos/LZH-sw.svg') !important;
-  background-size:     contain;
+  background-size:     60% auto;
   background-repeat:   no-repeat;
   background-position: center center;
 }

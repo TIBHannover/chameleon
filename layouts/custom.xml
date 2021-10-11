@@ -26,7 +26,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 <structure xmlns="https://ProfessionalWiki.github.io/chameleon/schema/3.0/layout.rng">
 	<grid class="flex-fill">
 		<row class="mt-1">
-			<cell class="ml-auto col-12 col-cmln">
+			<cell class="ml-auto col-12 col-cmln d-none">
 				<component type="Html"><![CDATA[
 							<span >REV: 3</span>
 						]]></component>
@@ -94,15 +94,21 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 	<grid class="mb-2 mt-4">
 		<row class="bg-luh-gray py-2">
 			<cell class="col-12 col-md-2">
-				<component type="NavbarHorizontal" collapsible="no" class="small my-3 bg-luh-gray" >
+				<component type="NavbarHorizontal" collapsible="no" class="small my-1 bg-luh-gray" >
 					<component type="Toolbox" flatten="no" class="dropup"/>
 				</component>
 			</cell>
 			<cell class="col-12 col-md-8">
 				<row>
-					<cell class="col-12 col-md-4 image-luh"></cell>
-					<cell class="col-12 col-md-4 image-tuc"></cell>
-					<cell class="col-12 col-md-4 image-lzh"></cell>
+					<cell class="col-12 col-md-4">
+						<component class="image-luh"></component>
+					</cell>
+					<cell class="col-12 col-md-4">
+						<component class="image-tuc"></component>
+					</cell>
+					<cell class="col-12 col-md-4">
+						<component class="image-lzh"></component>
+					</cell>
 				</row>
 			</cell>
 			<cell class="col-12 col-md-2">
