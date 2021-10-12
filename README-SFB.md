@@ -14,8 +14,8 @@ As mentioned in [README.md](./README.md)
 * install the [Bootstrap](https://www.mediawiki.org/wiki/Extension:Bootstrap) extension and enable it in the LocalSettings.php
 `wfLoadExtension( 'Bootstrap' );`
 * clone the [Chameleon Repository](https://github.com/TIBHannover/chameleon) to the /skins directory with branch:
-  * [sfb1153](https://github.com/TIBHannover/chameleon/tree/sfb1153) `git clone https://github.com/TIBHannover/chameleon.git -b sfb1368`  
-  * [sfb1368](https://github.com/TIBHannover/chameleon/tree/sfb1368) `git clone https://github.com/TIBHannover/chameleon.git -b sfb1153` 
+  * [sfb1153](https://github.com/TIBHannover/chameleon/tree/sfb1153) `git clone https://github.com/TIBHannover/chameleon.git -b sfb1153`  
+  * [sfb1368](https://github.com/TIBHannover/chameleon/tree/sfb1368) `git clone https://github.com/TIBHannover/chameleon.git -b sfb1368` 
 * enable the skin in the LocalSettings.php<br/>
 `wfLoadSkin( 'chameleon' )`
 * enable general layout customization in LocalSettings.php
