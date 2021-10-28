@@ -1,10 +1,8 @@
 <?php
 /**
- * File holding the Cell class
- *
  * This file is part of the MediaWiki skin Chameleon.
  *
- * @copyright 2013 - 2019, Stephan Gambke
+ * @copyright 2021, Morne Alberts
  * @license   GPL-3.0-or-later
  *
  * The Chameleon skin is free software: you can redistribute it and/or modify
@@ -24,28 +22,23 @@
  * @ingroup Skins
  */
 
-namespace Skins\Chameleon\Components;
-
-use Skins\Chameleon\ChameleonTemplate;
+namespace Skins\Chameleon\Tests\Unit\Components;
 
 /**
- * The Cell class.
+ * @coversDefaultClass \Skins\Chameleon\Components\Message
+ * @covers ::<private>
+ * @covers ::<protected>
  *
+ * @group   skins-chameleon
+ * @group   mediawiki-databaseless
+ *
+ * @author Morne Alberts
+ * @since 3.4
  * @ingroup Skins
+ * @ingroup Test
  */
-class Cell extends Container {
+class MessageTest extends GenericComponentTestCase {
 
-	/**
-	 * @param ChameleonTemplate $template
-	 * @param \DOMElement|null $domElement
-	 * @param int $indent
-	 */
-	public function __construct( ChameleonTemplate $template, \DOMElement $domElement = null,
-		$indent = 0 ) {
-
-		parent::__construct( $template, $domElement, $indent );
-
-		$this->addClasses( "col" );
-	}
+	protected $classUnderTest = '\Skins\Chameleon\Components\Message';
 
 }

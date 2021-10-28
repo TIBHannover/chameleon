@@ -107,11 +107,11 @@ class SetupAfterCache {
 	protected function registerCommonBootstrapModules() {
 		$this->bootstrapManager->addAllBootstrapModules();
 
-		// FIXME: Make configurable, e.g. in LocalSettings.php
-		$this->bootstrapManager->addStyleFile(
-			$this->configuration[ 'chameleonLocalPath' ] .
-				'/resources/styles/themes/_light.scss', 'beforeVariables'
-		);
+		if ( !empty( $this->configuration[ 'egChameleonThemeFile' ] ) ) {
+			$this->bootstrapManager->addStyleFile(
+				$this->configuration[ 'egChameleonThemeFile' ], 'beforeVariables'
+			);
+		}
 
 		$this->bootstrapManager->addStyleFile(
 			$this->configuration[ 'chameleonLocalPath' ] .
@@ -260,13 +260,19 @@ class SetupAfterCache {
 	protected function registerSkinWithMW() {
 		MediaWikiServices::getInstance()->getSkinFactory()->register( 'chameleon', 'Chameleon',
 			function () {
+				$styles = [
+					'mediawiki.ui.button',
+					'skins.chameleon',
+					'zzz.ext.bootstrap.styles',
+				];
+
+				if ( $this->configuration[ 'egChameleonEnableExternalLinkIcons' ] === true ) {
+					array_unshift( $styles, 'mediawiki.skinning.content.externallinks' );
+				}
+
 				return new Chameleon( [
 					'name' => 'chameleon',
-					'styles' => [
-						'mediawiki.ui.button',
-						'skins.chameleon',
-						'zzz.ext.bootstrap.styles',
-					]
+					'styles' => $styles
 				] );
 			} );
 	}

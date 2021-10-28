@@ -1,10 +1,10 @@
 <?php
 /**
- * File holding the Cell class
+ * File holding the Message class
  *
  * This file is part of the MediaWiki skin Chameleon.
  *
- * @copyright 2013 - 2019, Stephan Gambke
+ * @copyright 2021, Morne Alberts
  * @license   GPL-3.0-or-later
  *
  * The Chameleon skin is free software: you can redistribute it and/or modify
@@ -26,26 +26,28 @@
 
 namespace Skins\Chameleon\Components;
 
-use Skins\Chameleon\ChameleonTemplate;
-
 /**
- * The Cell class.
+ * The Message class.
  *
+ * This component allows insertion of system messages into the page.
+ *
+ * @author Morne Alberts
+ * @since 3.4
  * @ingroup Skins
  */
-class Cell extends Container {
+class Message extends Component {
 
 	/**
-	 * @param ChameleonTemplate $template
-	 * @param \DOMElement|null $domElement
-	 * @param int $indent
+	 * Builds the HTML code for this component
+	 *
+	 * @return String the HTML code
 	 */
-	public function __construct( ChameleonTemplate $template, \DOMElement $domElement = null,
-		$indent = 0 ) {
-
-		parent::__construct( $template, $domElement, $indent );
-
-		$this->addClasses( "col" );
+	public function getHtml() {
+		$name = $this->getAttribute( 'name' );
+		if ( !empty( $name ) ) {
+			return $this->getSkinTemplate()->getMsg( $name )->parse();
+		}
+		return '';
 	}
 
 }
