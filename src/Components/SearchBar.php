@@ -102,12 +102,6 @@ class SearchBar extends Component {
 			$attributes['placeholder'] = $this->getAttribute( 'placeholder' );
 		}
 
-		// pre-MW 1.35 backward compatibility
-		if ( !method_exists( Skin::class, 'makeSearchInput' ) ) {
-			/* @phan-suppress-next-line PhanAccessMethodProtected */
-			return $this->getSkinTemplate()->makeSearchInput( $attributes ) ?? '';
-		}
-
 		return $this->getSkin()->makeSearchInput( $attributes ) ?? '';
 	}
 
@@ -177,7 +171,7 @@ class SearchBar extends Component {
 	 */
 	private function shouldShowButton( $button ) {
 		$buttonsAttribute = $this->getAttribute( 'buttons' );
-		return $button === 'go' && $buttonsAttribute !== 'search' ||
-			$button === 'search' && $buttonsAttribute !== 'go';
+		return ( $button === 'go' && $buttonsAttribute !== 'search' ) ||
+			( $button === 'search' && $buttonsAttribute !== 'go' );
 	}
 }

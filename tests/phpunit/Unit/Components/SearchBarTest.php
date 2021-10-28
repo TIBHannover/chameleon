@@ -24,6 +24,8 @@
 
 namespace Skins\Chameleon\Tests\Unit\Components;
 
+use Skins\Chameleon\Tests\Util\MockupFactory;
+
 /**
  * @coversDefaultClass \Skins\Chameleon\Components\SearchBar
  * @covers ::<private>
@@ -40,5 +42,75 @@ namespace Skins\Chameleon\Tests\Unit\Components;
 class SearchBarTest extends GenericComponentTestCase {
 
 	protected $classUnderTest = '\Skins\Chameleon\Components\SearchBar';
+
+	/**
+	 * @covers ::getHTML
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHTML_ShowDefaultButtons( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$html = $instance->getHTML();
+
+		self::assertTag( [ 'class' => 'mw-searchButton' ], $instance->getHTML() );
+		self::assertTag( [ 'class' => 'searchGoButton' ], $instance->getHTML() );
+	}
+
+	/**
+	 * @covers ::getHTML
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHTML_ShowBothButtons( $domElement ) {
+		$domElement->setAttribute( 'buttons', 'search go' );
+
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$html = $instance->getHTML();
+
+		self::assertTag( [ 'class' => 'mw-searchButton' ], $instance->getHTML() );
+		self::assertTag( [ 'class' => 'searchGoButton' ], $instance->getHTML() );
+	}
+
+	/**
+	 * @covers ::getHTML
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHTML_ShowOnlySearchButton( $domElement ) {
+		$domElement->setAttribute( 'buttons', 'search' );
+
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$html = $instance->getHTML();
+
+		self::assertTag( [ 'class' => 'mw-searchButton' ], $instance->getHTML() );
+		self::assertNotTag( [ 'class' => 'searchGoButton' ], $instance->getHTML() );
+	}
+
+	/**
+	 * @covers ::getHTML
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHTML_ShowOnlyGoButton( $domElement ) {
+		$domElement->setAttribute( 'buttons', 'go' );
+
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$html = $instance->getHTML();
+
+		self::assertNotTag( [ 'class' => 'mw-searchButton' ], $instance->getHTML() );
+		self::assertTag( [ 'class' => 'searchGoButton' ], $instance->getHTML() );
+	}
 
 }
