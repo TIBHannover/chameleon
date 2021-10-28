@@ -26,12 +26,15 @@
 
 namespace Skins\Chameleon\Components;
 
+use Skins\Chameleon\IdRegistry;
+
 /**
  * The Container class.
  *
  * It will wrap its content elements in a DIV.
  *
- * Supported attributes:
+ * Supported attribs:
+ * - id
  * - class
  *
  * @author Stephan Gambke
@@ -47,7 +50,14 @@ class Container extends Structure {
 	 * @throws \MWException
 	 */
 	public function getHtml() {
-		$ret = $this->indent() . \Html::openElement( 'div', [ 'class' => $this->getClassString() ] );
+		$attribs = [ 'class' => $this->getClassString() ];
+
+		$id = $this->getAttribute( 'id' );
+		if ( $id !== '' ) {
+			$attribs['id'] = IdRegistry::getRegistry()->getId( $id );
+		}
+
+		$ret = $this->indent() . \Html::openElement( 'div', $attribs );
 		$this->indent( 1 );
 
 		$ret .= parent::getHtml();

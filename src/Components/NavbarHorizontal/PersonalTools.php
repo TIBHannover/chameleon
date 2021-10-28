@@ -41,6 +41,12 @@ use Skins\Chameleon\IdRegistry;
  */
 class PersonalTools extends Component {
 
+	private const ECHO_LINK_KEYS = [ 'notifications-alert', 'notifications-notice' ];
+	private const ATTR_SHOW_ECHO = 'showEcho';
+	private const SHOW_ECHO_ICONS = 'icons';
+	private const SHOW_ECHO_LINKS = 'links';
+	private const ATTR_SHOW_USER_NAME = 'showUserName';
+
 	/**
 	 * @return String
 	 * @throws \FatalError
@@ -48,7 +54,12 @@ class PersonalTools extends Component {
 	 */
 	public function getHtml() {
 		// start personal tools element
-		return $this->indent() . '<!-- personal tools -->' .
+		$echoHtml = '';
+		if ( $this->getShowEcho() === self::SHOW_ECHO_ICONS ) {
+			$echoHtml = $this->indent() . $this->getEchoIcons();
+		}
+		return $echoHtml .
+			$this->indent() . '<!-- personal tools -->' .
 			$this->indent() . '<div class="navbar-tools navbar-nav" >' .
 			$this->indent( 1 ) . \Html::rawElement( 'div', [ 'class' => 'navbar-tool dropdown' ],
 
@@ -69,12 +80,8 @@ class PersonalTools extends Component {
 		$user = $this->getSkinTemplate()->getSkin()->getUser();
 
 		$newMessagesAlert = $this->getSkinTemplate()->getMsg( 'chameleon-newmessages' )->text();
-		$newtalks = $user->getNewMessageLinks();
-		$out = $this->getSkinTemplate()->getSkin()->getOutput();
 
-		// Allow extensions to disable the new messages alert
-		if ( !Hooks::run( 'GetNewMessagesAlert', [ &$newMessagesAlert, $newtalks, $user, $out ] ) ||
-			count( $user->getNewMessageLinks() ) === 0 ) {
+		if ( empty( $this->getSkinTemplate()->data[ 'newtalk' ] ) ) {
 			return '';
 		}
 
@@ -89,6 +96,22 @@ class PersonalTools extends Component {
 
 	/**
 	 * @return string
+	 * @throws \FatalError
+	 * @throws \MWException
+	 */
+	protected function getUserName() {
+		if ( filter_var( $this->getAttribute( self::ATTR_SHOW_USER_NAME ), FILTER_VALIDATE_BOOLEAN ) ) {
+			$user = $this->getSkinTemplate()->getSkin()->getUser();
+			if ( $user->isLoggedIn() ) {
+				$username = !empty( $user->getRealName() ) ? $user->getRealName() : $user->getName();
+				return '<span class="user-name">' . htmlspecialchars( $username ) . '</span>';
+			}
+		}
+		return '';
+	}
+
+	/**
+	 * @return string
 	 * @throws \MWException
 	 */
 	protected function getTools() {
@@ -97,19 +120,64 @@ class PersonalTools extends Component {
 
 		// add personal tools (links to user page, user talk, prefs, ...)
 		foreach ( $this->getSkinTemplate()->getPersonalTools() as $key => $item ) {
-			if (isset($item['id'])){
-							$ret .= $this->indent() . $this->getSkinTemplate()->makeListItem( $key, $item,
-							[ 'tag' => 'div', 'link-class' => $item['id']  ] );
+			// Flatten classes to avoid MW bug: https://phabricator.wikimedia.org/T262160
+			if ( !empty( $item['links'][0]['class'] ) && is_array( $item['links'][0]['class'] ) ) {
+				$item['links'][0]['class'] = implode( ' ', $item['links'][0]['class'] );
 			}
-			else {
-							$ret .= $this->indent() . $this->getSkinTemplate()->makeListItem( $key, $item,
-											[ 'tag' => 'div' ] );
+
+			if ( in_array( $key, self::ECHO_LINK_KEYS ) ) {
+				$showEcho = $this->getShowEcho();
+				if ( $showEcho === self::SHOW_ECHO_LINKS ) {
+					// Remove Echo classes to render as a link
+					unset( $item['links'][0]['class'] );
+				} elseif ( $showEcho === self::SHOW_ECHO_ICONS ) {
+					// Icons will be rendered elsewhere
+					continue;
+				}
+			}
+
+			if ( isset( $item['id'] ) ) {
+				$ret .= $this->indent() . $this->getSkinTemplate()->makeListItem( $key, $item,
+					[ 'tag' => 'div', 'link-class' => $item['id'] ] );
+			} else {
+				$ret .= $this->indent() . $this->getSkinTemplate()->makeListItem( $key, $item,
+					[ 'tag' => 'div' ] );
 			}
 		}
 
 		$this->indent( -1 );
 		return $ret;
 	}
+
+	/**
+	 * @return string
+	 * @throws \MWException
+	 */
+	protected function getEchoIcons() {
+		$items = '';
+
+		foreach ( $this->getSkinTemplate()->getPersonalTools() as $key => $item ) {
+			if ( in_array( $key, self::ECHO_LINK_KEYS ) ) {
+				// Flatten classes to avoid MW bug: https://phabricator.wikimedia.org/T262160
+				if ( !empty( $item['links'][0]['class'] ) && is_array( $item['links'][0]['class'] ) ) {
+					$item['links'][0]['class'] = implode( ' ', $item['links'][0]['class'] );
+				}
+
+				$items .= $this->indent() .
+					$this->getSkinTemplate()->makeListItem( $key, $item );
+			}
+		}
+
+		if ( empty( $items ) ) {
+			return '';
+		}
+
+		return '<!-- echo icons -->' .
+			'<ul class="navbar-tools echo-icons">' .
+			$this->indent() . $items .
+			'</ul>';
+	}
+
 
 	/**
 	 * @return string
@@ -139,11 +207,19 @@ class PersonalTools extends Component {
 
 		$dropdownToggle = IdRegistry::getRegistry()->element( 'a', [ 'class' => $toolsClass,
 			'href' => '#', 'data-toggle' => 'dropdown', 'data-boundary' => 'viewport',
-			'title' => $toolsLinkText ], $this->getNewtalkNotifier(), $this->indent() );
+			'title' => $toolsLinkText ], $this->getNewtalkNotifier() . $this->getUserName(),
+			$this->indent() );
 
 		$this->indent( -1 );
 
 		return $dropdownToggle;
+	}
+
+	/**
+	 * @return string
+	 */
+	protected function getShowEcho() {
+		return $this->getAttribute( self::ATTR_SHOW_ECHO, self::SHOW_ECHO_ICONS );
 	}
 
 }

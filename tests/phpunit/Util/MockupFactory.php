@@ -24,6 +24,7 @@
 
 namespace Skins\Chameleon\Tests\Util;
 
+use Config;
 use FauxRequest;
 use Message;
 use PHPUnit\Framework\TestCase;
@@ -51,7 +52,6 @@ class MockupFactory {
 	private $testCase;
 	private $configuration = [
 		'UserIsLoggedIn'      => false,
-		'UserNewMessageLinks' => [],
 		'UserEffectiveGroups' => [ '*' ],
 		'UserRights' => [],
 	];
@@ -130,7 +130,12 @@ class MockupFactory {
 
 		$chameleonTemplate->expects( $this->testCase->any() )
 			->method( 'getPersonalTools' )
-			->will( $this->testCase->returnValue( [ 'foo' => [], 'bar' => [] ] ) );
+			->will( $this->testCase->returnValue( [
+				'foo' => [ 'id' => 'pt-foo' ],
+				'bar' => [ 'id' => 'pt-bar' ],
+				'notifications-alert' => [ 'id' => 'pt-notifications-alert' ],
+				'notifications-notice' => [ 'id' => 'pt-notifications-notice'],
+			] ) );
 
 		$chameleonTemplate->expects( $this->testCase->any() )
 			->method( 'getFooterLinks' )
@@ -283,7 +288,23 @@ class MockupFactory {
 		$skin->expects( $this->testCase->any() )
 			->method( 'msg' )
 			->will( $this->testCase->returnValue( $this->getMessageStub() ) );
+
+		$skin->expects( $this->testCase->any() )
+			->method( 'getConfig' )
+			->will( $this->testCase->returnValue( $this->getConfigStub() ) );
+
 		return $skin;
+	}
+
+	/**
+	 * @return \PHPUnit\Framework\MockObject\MockObject|\PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected function getConfigStub() {
+		$config = $this->testCase->getMockBuilder( Config::class )
+			->disableOriginalConstructor()
+			->getMock();
+
+		return $config;
 	}
 
 	/**
@@ -312,10 +333,6 @@ class MockupFactory {
 		$user->expects( $this->testCase->any() )
 			->method( 'isLoggedIn' )
 			->will( $this->testCase->returnValue( $this->get( 'UserIsLoggedIn', true ) ) );
-
-		$user->expects( $this->testCase->any() )
-			->method( 'getNewMessageLinks' )
-			->will( $this->testCase->returnValue( $this->get( 'UserNewMessageLinks', 0 ) ) );
 
 		$user->expects( $this->testCase->any() )
 			->method( 'getEffectiveGroups' )

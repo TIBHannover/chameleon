@@ -52,14 +52,13 @@ class PersonalToolsTest extends GenericComponentTestCase {
 	public function testGetHtml_LoggedInUserHasNewMessages( $domElement ) {
 		$factory = MockupFactory::makeFactory( $this );
 		$factory->set( 'UserIsLoggedIn', true );
-		$factory->set( 'UserNewMessageLinks', [ 'foo' ] );
 		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => 'foo' ];
 
 		/** @var Component $instance */
 		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
 
-		$matcher = [ 'class' => 'pt-mytalk' ];
-		$this->assertTag( $matcher, $instance->getHtml() );
+		$this->assertTag( [ 'class' => 'pt-mytalk' ], $instance->getHtml() );
 	}
 
 	/**
@@ -69,14 +68,115 @@ class PersonalToolsTest extends GenericComponentTestCase {
 	public function testGetHtml_LoggedInUserHasNoNewMessages( $domElement ) {
 		$factory = MockupFactory::makeFactory( $this );
 		$factory->set( 'UserIsLoggedIn', true );
-		$factory->set( 'UserNewMessageLinks', [] );
 		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => '' ];
 
 		/** @var Component $instance */
 		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
 
-		$matcher = [ 'class' => 'pt-mytalk' ];
-		$this->assertNotTag( $matcher, $instance->getHtml() );
+		$this->assertNotTag( [ 'class' => 'pt-mytalk' ], $instance->getHtml() );
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_LoggedOutUserHasNewMessages( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$factory->set( 'UserIsLoggedIn', false );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => 'foo' ];
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+
+		$this->assertTag( [ 'class' => 'pt-anontalk' ], $instance->getHtml() );
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_LoggedOutUserHasNoNewMessages( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$factory->set( 'UserIsLoggedIn', false );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => '' ];
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+
+		$this->assertNotTag( [ 'class' => 'pt-anontalk' ], $instance->getHtml() );
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoDefault( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				// Icons are rendered without link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'] ],
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'tag' => 'div' , 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'tag' => 'div' , 'link-class' => 'pt-bar' ] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoIcons( $domElement ) {
+		$domElement->setAttribute( 'showEcho', 'icons' );
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				// Icons are rendered without link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'] ],
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'tag' => 'div' , 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'tag' => 'div' , 'link-class' => 'pt-bar' ] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoLinks( $domElement ) {
+		$domElement->setAttribute( 'showEcho', 'links' );
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'tag' => 'div' , 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'tag' => 'div' , 'link-class' => 'pt-bar' ] ],
+				// Links are rendered with link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'],
+					[ 'tag' => 'div' , 'link-class' => 'pt-notifications-alert' ] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'],
+					[ 'tag' => 'div' , 'link-class' => 'pt-notifications-notice' ] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
 	}
 
 }

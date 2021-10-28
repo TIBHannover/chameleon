@@ -50,9 +50,6 @@ class Chameleon extends SkinTemplate {
 
 	private $componentFactory;
 
-	// FIXME: Remove when MW 1.31 compatibility is dropped
-	private $stylesHaveBeenProcessed = false;
-
 	/**
 	 * @throws \Exception
 	 */
@@ -88,41 +85,10 @@ class Chameleon extends SkinTemplate {
 		};
 
 		// set default skin layout
-		if ( $GLOBALS[ 'egChameleonLayoutFile' ][0] !== '/' ) {
+		if ( DIRECTORY_SEPARATOR === '/' && $GLOBALS[ 'egChameleonLayoutFile' ][0] !== '/' ) {
 			$GLOBALS[ 'egChameleonLayoutFile' ] = $GLOBALS[ 'wgStyleDirectory' ] . '/chameleon/' .
 				$GLOBALS[ 'egChameleonLayoutFile' ];
 		}
-	}
-
-	/**
-	 * @return array Array of modules
-	 */
-	public function getDefaultModules() {
-		global $wgVersion;
-
-		$modules = parent::getDefaultModules();
-
-		if ( version_compare( $wgVersion, '1.35', '<' ) ) {
-			// Not necessary in 1.35 (see #110)
-			$modulePos = array_search( 'mediawiki.legacy.shared', $modules[ 'styles' ][ 'core' ] );
-
-			if ( $modulePos !== false ) {
-				// we have our own version of these styles
-				unset( $modules[ 'styles' ][ 'core' ][ $modulePos ] );
-			}
-
-			// These are added in SetupAfterCache::registerSkinWithMW in >= 1.35
-			$modules[ 'styles' ][ 'content' ][] = 'mediawiki.skinning.content';
-			$modules[ 'styles' ][ 'content' ][] = 'mediawiki.ui.button';
-			$modules[ 'styles' ][ 'content' ][] = 'zzz.ext.bootstrap.styles';
-			$modules[ 'styles' ][ 'content' ][] = 'mediawiki.legacy.commonPrint';
-
-			if ( $out->isSyndicated() ) {
-				$modules[ 'styles' ][ 'content' ][] = 'mediawiki.feedlink';
-			}
-		}
-
-		return $modules;
 	}
 
 	/**
@@ -199,5 +165,13 @@ class Chameleon extends SkinTemplate {
 	 */
 	protected function getLayoutFilePath() {
 		return $GLOBALS[ 'egChameleonLayoutFile' ];
+	}
+
+	/**
+	 * Template method that can be overridden by subclasses
+	 * @return string Path to theme file
+	 */
+	protected function getThemeFilePath() {
+		return $GLOBALS[ 'egChameleonThemeFile' ];
 	}
 }

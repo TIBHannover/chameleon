@@ -24,6 +24,7 @@ The following components and modifications are available:
 - [Component `Logo`](#component-logo)
 - [Component `MainContent`](#component-maincontent)
 - [Component `Menu`](#component-menu)
+- [Component `Message`](#component-message)
 - [Component `NavbarHorizontal`](#component-navbarhorizontal)
 - [Component `NavMenu`](#component-navmenu)
 - [Component `NewtalkNotifier`](#component-newtalknotifier)
@@ -90,6 +91,22 @@ recommended.
   Use `fixedwidth` for a responsive fixed width layout. Use `fluid` for a full
   width layout, spanning the entire width of the viewport.
 
+* `id`:
+  * Since Chameleon 3.3.0
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The id that should be assigned to the grid element.
+
+* `class`:
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The class (or classes) that should be assigned to the grid element.
+
+
 #### Allowed Parent Elements:
 * [Structure](#structure)
 
@@ -112,7 +129,21 @@ cells, and only cells may be immediate children of rows.
 ```
 
 #### Attributes:
-None.
+* `id`:
+  * Since Chameleon 3.3.0
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The id that should be assigned to the row element.
+
+* `class`:
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The class (or classes) that should be assigned to the row element.
+
 
 #### Allowed Parent Elements:
 * [Grid](#grid)
@@ -126,24 +157,30 @@ None.
 
 Holds components. 
 
-For each cell specify the number of columns you wish to span.
-
 #### Example usage
 
 ``` xml
-<cell span="12">
+<cell>
   ...
 </cell>
 ```
 
 #### Attributes:
-* `span`:
-  * Allowed values: Numbers (1 ... 12)
-  * Default: `12`
-  
-  The number of columns this cell shall span. All cells of a row should together
-  span 12 columns. If more than 12 columns are placed within a single row, each
-  group of extra columns will, as one unit, wrap onto a new line.
+* `id`:
+  * Since Chameleon 3.3.0
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The id that should be assigned to the cell element.
+
+* `class`:
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The class (or classes) that should be assigned to the cell element.
+
 
 #### Allowed Parent Elements:
 * [Row](#row)
@@ -157,7 +194,7 @@ For each cell specify the number of columns you wish to span.
 ### Component `Container`
 
 This component will wrap its content elements in a `<div>`. It may be used to
-assign a CSS class for styling purposes.
+assign a CSS id or class for styling purposes.
 
 #### Example usage
 
@@ -168,6 +205,14 @@ assign a CSS class for styling purposes.
 ```
 
 #### Attributes:
+* `id`:
+  * Since Chameleon 3.3.0
+  * Allowed values: Any string
+  * Default: -
+  * Optional.
+
+  The id that should be assigned to the `<div>` element.
+
 * `class`:
   * Allowed values: Any string
   * Default: -
@@ -457,6 +502,35 @@ Using an inline description:
 * Any modification
 
 -------------------------------------------------------------------------------
+### Component `Message`
+
+Displays a [MediaWiki message](https://www.mediawiki.org/wiki/Help:System_message).
+
+Since Chamaleon 3.4.0
+
+#### Example usage
+
+To display the message _MediaWiki:MyMessage_:
+
+``` xml
+<component type="Message" name="MyMessage" />
+```
+
+#### Attributes:
+* `name`:
+  * Allowed values: String
+  * Default: -
+
+  The message name without the _MediaWiki:_ prefix.
+
+#### Allowed Parent Elements:
+* [Structure](#structure)
+* [Cell](#cell)
+
+#### Allowed Child Elements:
+* Any modification
+
+-------------------------------------------------------------------------------
 ### Component `NavbarHorizontal`
 
 A horizontal navbar that takes its contents from its child elements.
@@ -471,6 +545,13 @@ From [navhead.xml](../layouts/navhead.xml):
 	<component type="PageTools" position="right" hideSelectedNameSpace="yes"/>
 	<component type="SearchBar" position="right"/>
 	<component type="PersonalTools" position="right"/>
+</component>
+```
+
+Add "Menu" text next to the toggler button:
+``` xml
+<component type="NavbarHorizontal" showTogglerText="yes">
+	<!-- ... -->
 </component>
 ```
 
@@ -493,6 +574,14 @@ From [navhead.xml](../layouts/navhead.xml):
   * **Deprecated.** Use the [Sticky](#modification-sticky) modification instead.
   * Allowed values: Boolean (`yes`|`no`)
   * Default: `no`
+
+* `showTogglerText`:
+  * Since Chameleon 3.3.0
+  * Allowed values: Boolean (`yes`|`no`)
+  * Default: `no`
+  * Optional.
+
+  Displays text next to the toggler icon. The text is defined in the system message `chameleon-toggler`.
 
 #### Allowed Parent Elements:
 * [Structure](#structure)
@@ -699,12 +788,34 @@ applicable.
   If set the newtalk notifier will not be shown.
 
   This attribute has no effect when used inside the
-  [NavbarHorizontal](#component-navbar-horizontal) component.
+  [NavbarHorizontal](#component-navbarhorizontal) component.
   
   This attribute was introduced to keep backwards compatibility. If the
   PersonalTools component is used, it is recommended to always set this
   attribute to *yes* and use an independent
   [NewtalkNotifier](#component-newtalknotifier) component.
+
+* `showEcho`:
+  * Since Chameleon 3.2.0
+  * Allowed values: String (`icons`|`links`)
+  * Default: `icons`
+  * Optional.
+
+  Use `icons` to render Echo links as icons that trigger popups (default Echo behavior).
+  When the parent is `NavbarHorizontal` the Echo icons will be displayed next to the dropdown.
+  Use `links` to render Echo links as normal links without popups.
+
+* `showUserName`:
+  * Since Chameleon 3.4.0
+  * Allowed values: Boolean (`yes`|`no`)
+  * Default: `no`
+  * Optional.
+
+  If set the logged in user's real name (if available) or username will be shown next to the
+  dropdown icon.
+
+  This attribute applies only when used inside the
+  [NavbarHorizontal](#component-navbarhorizontal) component.
 
 #### Allowed Parent Elements:
 * [Structure](#structure)

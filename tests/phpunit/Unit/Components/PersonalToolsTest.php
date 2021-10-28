@@ -24,6 +24,8 @@
 
 namespace Skins\Chameleon\Tests\Unit\Components;
 
+use Skins\Chameleon\Tests\Util\MockupFactory;
+
 /**
  * @coversDefaultClass \Skins\Chameleon\Components\PersonalTools
  * @covers ::<private>
@@ -40,5 +42,107 @@ namespace Skins\Chameleon\Tests\Unit\Components;
 class PersonalToolsTest extends GenericComponentTestCase {
 
 	protected $classUnderTest = '\Skins\Chameleon\Components\PersonalTools';
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowNewtalkNotifier( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => 'foo' ];
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+
+		$this->assertTag( [ 'class' => 'usermessage' ], $instance->getHtml() );
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_HideNewtalkNotifier( $domElement ) {
+		$domElement->setAttribute( 'hideNewtalkNotifier', true );
+
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->data = [ 'newtalk' => 'foo' ];
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+
+		$this->assertNotTag( [ 'class' => 'usermessage' ], $instance->getHtml() );
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoDefault( $domElement ) {
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'link-class' => 'pt-bar' ] ],
+				// Icons are rendered without link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoIcons( $domElement ) {
+		$domElement->setAttribute( 'showEcho', 'icons' );
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'link-class' => 'pt-bar' ] ],
+				// Icons are rendered without link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
+	}
+
+	/**
+	 * @covers ::getHtml
+	 * @dataProvider domElementProviderFromSyntheticLayoutFiles
+	 */
+	public function testGetHtml_ShowEchoLinks( $domElement ) {
+		$domElement->setAttribute( 'showEcho', 'links' );
+		$factory = MockupFactory::makeFactory( $this );
+		$chameleonTemplate = $factory->getChameleonSkinTemplateStub();
+		$chameleonTemplate->expects( $this->exactly( 4 ) )
+			->method( 'makeListItem' )
+			->withConsecutive(
+				[ 'foo', [ 'id' => 'pt-foo'], [ 'link-class' => 'pt-foo' ] ],
+				[ 'bar', [ 'id' => 'pt-bar'], [ 'link-class' => 'pt-bar' ] ],
+				// Links are rendered with link-class
+				[ 'notifications-alert', [ 'id' => 'pt-notifications-alert'],
+					[ 'link-class' => 'pt-notifications-alert' ] ],
+				[ 'notifications-notice', [ 'id' => 'pt-notifications-notice'],
+					[ 'link-class' => 'pt-notifications-notice' ] ]
+			);
+
+		/** @var Component $instance */
+		$instance = new $this->classUnderTest( $chameleonTemplate, $domElement );
+		$instance->getHtml();
+	}
 
 }

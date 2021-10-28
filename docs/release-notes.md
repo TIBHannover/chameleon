@@ -1,5 +1,61 @@
 ## Release Notes
 
+### Chameleon 4.0.0
+
+Under development.
+
+* Raised minimum Bootstrap extension version from 4.2 to 4.5
+* Raised minimum MediaWiki version from 1.31 to 1.35
+* Raised minimum PHP version from 7.1 to 7.4.3
+
+### Chameleon 3.4.1
+
+Released on September 16, 2021.
+
+* Fixed scssphp 1.7.0 compatibility (@thanks malberts)
+
+### Chameleon 3.4.0
+
+Released on August 7, 2021.
+
+* Added `Message` component to display system messages (thanks @malberts)
+* Added `PersonalTools` component user name display support via the new `showUserName` attribute (thanks @malberts)
+* Fixed `Toolbox` component PHP notice (thanks @WouterRademaker and @malberts)
+* Translation updates for system messages (thanks @translatewiki and its translator community)
+
+### Chameleon 3.3.0
+
+Released on June 20, 2021.
+
+* Fixed MediaWiki 1.31 compatibility
+* Added `NavbarHorizontal` component toggler text support via the new `showTogglerText` attribute (thanks @malberts)
+* Added `id` attribute to structure components: `Grid`, `Row`, `Cell` and `Container` (thanks @malberts)
+
+### Chameleon 3.2.1
+
+Released on June 3, 2021.
+
+Warning: This release contains a regression that causes incompatibility with MediaWiki 1.31.
+
+* Fixed `LangLinks` component PHP notice (thanks @WouterRademaker)
+
+### Chameleon 3.2.0
+
+Released on June 2, 2021.
+
+Warning: This release contains a regression that causes incompatibility with MediaWiki 1.31.
+
+* Improved Echo support in the `PersonalTools` components (thanks @malberts)
+* Added theme support via the new `ChameleonThemeFile` setting (thanks @malberts)
+* Added grid breakpoint override support via the new `$cmln-grid-breakpoints` SCSS variable (thanks @malberts)
+* Improved MultimediaViewer extension support (requires [cache update](https://github.com/malberts/chameleon/blob/issue-178/docs/customization.md#triggering-a-cache-update)) (thanks @malberts) 
+* Added external link icons support via the new `ChameleonEnableExternalLinkIcons` setting (thanks @malberts)
+* Fixed layout and scroll issues when using the sticky menu and clicking anchor links (thanks @vedmaka)
+* Fixed display of some icons (thanks @malberts and @WouterRademaker)
+* Updated Font Awesome and hc-sticky libraries (thanks @malberts)
+* Fixed Mediawiki 1.35 deprecations (thanks @jdlrobson and @malberts)
+* Fixed Mediawiki 1.35 missing menu icons (thanks @WouterRademaker)
+
 ### Chameleon 3.1.0
 
 Released on September 24, 2020.
