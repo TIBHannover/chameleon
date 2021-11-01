@@ -21,7 +21,8 @@ As mentioned in [README.md](./README.md)
 * enable general layout customization in LocalSettings.php
 `$egChameleonLayoutFile = __DIR__ . '/skins/chameleon/layouts/custom.xml';`
 * enable style customization in LocalSettings.php
-`$egChameleonExternalStyleModule =  __DIR__ . '/skins/chameleon/resources/styles/custom.scss';`
+`$egChameleonExternalStyleModules =  [ __DIR__ . '/skins/chameleon/resources/styles/custom.scss' ];`
+
 
 ## 2. Modify Customization (not required)
 * Disable cache in LocalSettings.php for development
