@@ -41,6 +41,12 @@ $sbf-color-4: #004F9F; // do not use, to close to luh-blue
   color: $luh-gray !important;
 }
 
+// ================ HEADING ================
+
+h1, h2 {
+  border-bottom: 1px solid $luh-gray !important;
+}
+
 // ================ IMAGES ================
 
 .image-luh {
@@ -129,9 +135,11 @@ input[type="submit"][value="Go"],
 .editOptions .oo-ui-buttonElement-button,
 button#wpLoginAttempt,
 button[value="Reset password"],
+button[value="Request account"],
 button.oo-ui-buttonElement-button,
 button[name="wpPreview"],
 button[name="wpRunQuery"],
+input#search-action,
 button[name="wpDiff"],
 .cancelLink a[role="button"],
 .oo-ui-flaggedElement-destructive a[role="button"],
@@ -176,6 +184,7 @@ button[name="wpRunQuery"],
 input#search-action,
 button[value="Search"],
 button[value="Reset password"],
+button[value="Request account"],
 form[name="accountrequest"] input[type="submit"],
 a.pfUploadable {
   /* @extend .btn-primary; */
