@@ -278,12 +278,14 @@ label.radioButtonItem {
   @extend .form-check;
 }
 
-/*
+
 table.formtable input[type="radio"] {
-  @extend .form-check-input;
-  display: inline-block !important;
-  height: 2em;
+  /*@extend .form-check-input;*/
+  /*display: inline-block !important;*/
+  height: 1.25em !important;
 }
+
+/*
 
 table.formtable input[type="checkbox"] {
   @extend .form-check-input;
