@@ -300,14 +300,9 @@ table.formtable {
 }
 
 table.formtable td, table.formtable th {
-  @extend .pt-1;
-  @extend .pb-0;
-  @extend .pr-0;
-  @extend .pl-0;
+  @extend .py-1;
+  @extend .px-0;
 }
-
-
-
 
 table.formtable input, textarea {
   margin-top: 0px;
